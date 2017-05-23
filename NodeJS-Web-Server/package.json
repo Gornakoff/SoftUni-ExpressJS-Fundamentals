@@ -1,7 +1,7 @@
 {
-  "name": "web-server",
+  "name": "shopstop-part2",
   "version": "1.0.0",
-  "description": "Node.js Web Server",
+  "description": "ShopStop - Part 2",
   "main": "index.js",
   "keywords": [
     "nodejs",
