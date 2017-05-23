@@ -9,5 +9,9 @@
     "server"
   ],
   "author": "Gornakov",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "multiparty": "^4.1.3",
+    "shortid": "^2.2.8"
+  }
 }
