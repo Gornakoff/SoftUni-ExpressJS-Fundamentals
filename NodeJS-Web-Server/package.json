@@ -1,0 +1,13 @@
+{
+  "name": "web-server",
+  "version": "1.0.0",
+  "description": "Node.js Web Server",
+  "main": "index.js",
+  "keywords": [
+    "nodejs",
+    "web",
+    "server"
+  ],
+  "author": "Gornakov",
+  "license": "MIT"
+}
