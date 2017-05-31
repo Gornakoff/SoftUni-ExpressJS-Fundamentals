@@ -4,7 +4,7 @@
   "description": "Server that process images",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "keywords": [
     "images",
@@ -12,5 +12,11 @@
     "node"
   ],
   "author": "Gornakov",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "del": "2.2.2",
+    "gulp": "3.9.1",
+    "gulp-htmlmin": "3.0.0",
+    "gulp-rename": "1.2.2"
+  }
 }
