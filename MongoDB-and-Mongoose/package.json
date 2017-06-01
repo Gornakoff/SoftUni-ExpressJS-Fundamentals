@@ -1,5 +1,5 @@
 {
-  "name": "mongodb",
+  "name": "mongodb-exercise",
   "version": "1.0.0",
   "description": "MongoDB and Mongoose",
   "main": "index.js",
@@ -12,5 +12,14 @@
     "mongoose"
   ],
   "author": "Gornakov",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mongodb": "2.2.27",
+    "mongoose": "4.10.4",
+    "gulp": "3.9.1",
+    "gulp-clean-css": "3.4.0",
+    "gulp-rename": "1.2.2",
+    "multiparty": "4.1.3",
+    "shortid": "2.2.8"
+  }
 }
