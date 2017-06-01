@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Web server - Add new image</title>
+  <link href="../../content/styles/site.css" rel="stylesheet"/>
+</head>
+<body>
+  <header>
+        <nav class="nav">
+            <ul>
+                <li><a href="/">Home Page</a></li>              
+                <li><a href="/images/all">Show All Images</a></li>                
+            </ul>
+        </nav>
+    </header>
+  <main>
+    <h1 class="head-title">Add new image</h1>
+
+    <form class="form center-form" method="POST" enctype="multipart/form-data" >
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" class="input-field" />
+      </div>
+
+      <div class="form-group">
+        <label for="url">Image</label>
+        <input id="image" name="fileName" type="file" class="input-field" />
+      </div>
+
+      <div class="form-group">
+        <label for="checkbox">Private</label>
+        <input id="private" name="private" type="checkbox" class="input-field" />
+      </div>
+
+      <div class="form-group">
+        <input class="btn form-btn" type="submit" value="Add">
+      </div>
+    </form>
+
+  </main>
+</body>
+</html>
