@@ -1,0 +1,20 @@
+{
+  "name": "mongodb-mongoose",
+  "version": "1.0.0",
+  "description": "MongoDB and Mongoose exercise @ SoftUni",
+  "engines": {
+    "node": "8.0.0",
+    "npm": "5.0.0"
+  },
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "mongo",
+    "mongodb",
+    "mongoose"
+  ],
+  "author": "Gornakov",
+  "license": "MIT"
+}
