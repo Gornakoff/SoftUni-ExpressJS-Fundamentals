@@ -16,5 +16,8 @@
     "mongoose"
   ],
   "author": "Gornakov",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "mongoose": "4.10.4"
+  }
 }
