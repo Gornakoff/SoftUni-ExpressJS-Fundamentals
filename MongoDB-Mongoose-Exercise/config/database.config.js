@@ -18,4 +18,7 @@ module.exports = (config, port) => {
   database.on('error', (err) => {
     console.log(err)
   })
+
+  require('../models/Image')
+  require('../models/Tag')
 }
