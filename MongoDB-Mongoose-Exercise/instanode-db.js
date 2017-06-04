@@ -1,6 +1,5 @@
 const Image = require('./models/Image')
 const Tag = require('./models/Tag')
-const mongoose = require('mongoose')
 
 function createTag (tagName) {
   return new Promise((resolve, reject) => {
@@ -94,24 +93,21 @@ module.exports = {
       result = 10
     }
     if (!minDate) {
-      minDate = new Date(-8640000000000000)
+      minDate = new Date(-8640000000000000).toISOString()
     }
     if (!maxDate) {
-      let now = new Date()
-      maxDate = now.toISOString()
-      console.log(maxDate)
+      maxDate = new Date().toISOString()
     }
 
     return new Promise((resolve, reject) => {
       Image.find({
         creationDate: {
           $gte: minDate,
-          $lt: maxDate
+          $lte: maxDate
         }
       })
         .limit(result)
         .then((images) => {
-          console.log(images)
           resolve(images)
         })
     })
