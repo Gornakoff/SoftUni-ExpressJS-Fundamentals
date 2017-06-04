@@ -16,5 +16,7 @@ database(config[environment], config.port)
 
     // instanodeDb.findByTag('cat')
 
-    // instanodeDb.filter({after: minDate, before: maxDate, results: 24})
+    instanodeDb.filter().then((images) => {
+      images.forEach(i => console.log(i))
+    })
   })

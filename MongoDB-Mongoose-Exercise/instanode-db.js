@@ -1,5 +1,6 @@
 const Image = require('./models/Image')
 const Tag = require('./models/Tag')
+const mongoose = require('mongoose')
 
 function createTag (tagName) {
   return new Promise((resolve, reject) => {
@@ -76,11 +77,43 @@ module.exports = {
               for (let image of sorted) {
                 console.log(image.creationDate)
               }
-              resolve()
+              resolve(sorted)
             })
         })
     })
   },
-  filter: () => {
+  filter: (minDate, maxDate, result) => {
+    // Image.find({ })
+    //   .then((images) => {
+    //     let getMinDate = images.sort((a, b) => a.creationDate > b.creationDate)
+    //     minDate = getMinDate[0].creationDate
+    //     console.log('minDate')
+    //     resolve(minDate)
+    //   })
+    if (!result) {
+      result = 10
+    }
+    if (!minDate) {
+      minDate = new Date(-8640000000000000)
+    }
+    if (!maxDate) {
+      let now = new Date()
+      maxDate = now.toISOString()
+      console.log(maxDate)
+    }
+
+    return new Promise((resolve, reject) => {
+      Image.find({
+        creationDate: {
+          $gte: minDate,
+          $lt: maxDate
+        }
+      })
+        .limit(result)
+        .then((images) => {
+          console.log(images)
+          resolve(images)
+        })
+    })
   }
 }
