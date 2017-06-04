@@ -65,7 +65,21 @@ module.exports = {
           })
       })
   },
-  findByTag: () => {
+  findByTag: (tagName) => {
+    return new Promise((resolve, reject) => {
+      Tag.findOne({ name: tagName })
+        .then((tagData) => {
+          Image.find({ tags: tagData._id })
+            .then((images) => {
+              let sorted = images.sort((a, b) => a.creationDate < b.creationDate)
+
+              for (let image of sorted) {
+                console.log(image.creationDate)
+              }
+              resolve()
+            })
+        })
+    })
   },
   filter: () => {
   }
