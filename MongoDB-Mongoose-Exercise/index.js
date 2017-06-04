@@ -16,7 +16,8 @@ database(config[environment], config.port)
 
     // instanodeDb.findByTag('cat')
 
-    instanodeDb.filter().then((images) => {
+    instanodeDb.filter(null, null, 3).then((images) => {
       images.forEach(i => console.log(i))
     })
+    // instanodeDb.filter()
   })
