@@ -1,0 +1,16 @@
+{
+  "name": "expressjs",
+  "version": "1.0.0",
+  "description": "ExpressJS and View Engines",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "expressjs",
+    "view",
+    "engines"
+  ],
+  "author": "Gornakov",
+  "license": "MIT"
+}
