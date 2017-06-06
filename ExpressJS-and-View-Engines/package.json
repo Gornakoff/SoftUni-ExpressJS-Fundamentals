@@ -4,7 +4,7 @@
   "description": "ExpressJS and View Engines",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "keywords": [
     "expressjs",
@@ -22,6 +22,7 @@
     "mongodb": "2.2.27",
     "mongoose": "4.10.4",
     "multer": "1.3.0",
-    "pug": "2.0.0-rc.2"
+    "pug": "2.0.0-rc.2",
+    "typings": "2.1.1"
   }
 }
