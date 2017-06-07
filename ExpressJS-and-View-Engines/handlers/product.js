@@ -126,4 +126,13 @@ module.exports.deletePost = (req, res) => {
 }
 
 module.exports.buyGet = (req, res) => {
+  let id = req.params.id
+
+  Product.findById(id).then((product) => {
+    if (!product) {
+      res.sendStatus(404)
+      return
+    }
+    res.render('product/buy', {product: product})
+  })
 }
