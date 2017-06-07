@@ -1,8 +1,9 @@
 const controllers = require('../controllers')
+const auth = require('./auth')
 
 module.exports = (app) => {
   app.get('/', controllers.home.index)
-  app.get('/about', controllers.home.about)
+  app.get('/about', auth.isAuthenticated, controllers.home.about) // added authentication route
 
   app.get('/users/register', controllers.users.registerGet)
   app.post('/users/register', controllers.users.registerPost)
