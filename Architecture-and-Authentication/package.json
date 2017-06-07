@@ -1,0 +1,27 @@
+{
+  "name": "boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "engines": {
+    "node": "8.0.0",
+    "npm": "5.0.0"
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "express",
+    "mongo",
+    "monngoose"
+  ],
+  "author": "Gornakov",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.15.3",
+    "mongoose": "4.10.5",
+    "typings": "2.1.1"
+  }
+}
