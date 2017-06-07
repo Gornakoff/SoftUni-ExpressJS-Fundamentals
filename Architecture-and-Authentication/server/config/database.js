@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const User = require('../data/User')
 
 mongoose.Promise = global.Promise
 
@@ -12,6 +13,8 @@ module.exports = (settings) => {
       throw err
     }
     console.log('Connected to MongoDB!')
+
+    User.seedAdminUser()
   })
   db.on('error', (err) => {
     console.log(`Database error: ${err}`)
