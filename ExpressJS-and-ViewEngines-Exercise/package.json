@@ -1,0 +1,17 @@
+{
+  "name": "express-exercise",
+  "version": "1.0.0",
+  "description": "Express JS and View Engines Exercises",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "express",
+    "expressjs",
+    "view",
+    "engines"
+  ],
+  "author": "Gornakov",
+  "license": "MIT"
+}
