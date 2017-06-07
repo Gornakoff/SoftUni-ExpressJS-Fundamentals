@@ -1,8 +1,20 @@
 const mongoose = require('mongoose')
 
 let categorySchema = mongoose.Schema({
-  name: { type: mongoose.Schema.Types.String, required: true },
-  products: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Product' } ]
+  name: {
+    type: mongoose.Schema.Types.String,
+    unique: true,
+    required: true
+  },
+  creator: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
+  },
+  products: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }]
 })
 
 let Category = mongoose.model('Category', categorySchema)
