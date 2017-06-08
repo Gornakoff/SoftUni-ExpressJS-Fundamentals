@@ -15,6 +15,9 @@ module.exports = (app) => {
   app.get('/user/register', handlers.user.registerGet)
   app.post('/user/register', handlers.user.registerPost)
 
+  app.get('/user/login', handlers.user.loginGet)
+  app.post('/user/login', handlers.user.loginPost)
+
   app.get('/category/:category/products', handlers.category.productByCategory)
 
   app.get('/product/edit/:id', handlers.product.editGet)
