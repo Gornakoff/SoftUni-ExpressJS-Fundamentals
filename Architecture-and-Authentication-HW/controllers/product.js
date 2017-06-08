@@ -12,6 +12,7 @@ module.exports.addGet = (req, res) => {
 module.exports.addPost = (req, res) => {
   let productObj = req.body
   productObj.image = '/' + req.file.path
+  productObj.creator = req.user._id
 
   Product.create(productObj).then((product) => {
     Category.findById(product.category).then((category) => {
@@ -31,12 +32,16 @@ module.exports.editGet = (req, res) => {
       return
     }
 
-    Category.find().then((categories) => {
-      res.render('product/edit', {
-        product: product,
-        categories: categories
+    if (product.creator.equals(req.user._id) || req.user.roles.indexOf('Admin') >= 0) {
+      Category.find().then((categories) => {
+        res.render('product/edit', {
+          product: product,
+          categories: categories
+        })
       })
-    })
+    } else {
+      res.redirect(`/?error=${encodeURIComponent('Request Error: You must be "creator" or "admin" to EDIT the product!')}`)
+    }
   })
 }
 
@@ -46,42 +51,44 @@ module.exports.editPost = (req, res) => {
 
   Product.findById(id).then((product) => {
     if (!product) {
-      res.redirect(
-        `/?error=${encodeURIComponent('error=Product was not found!')}`)
+      res.redirect(`/?error=${encodeURIComponent('error=Product was not found!')}`)
       return
     }
+    if (editedProduct.creator.equals(req.user._id) || req.user.roles.indexOf('Admin') >= 0) {
+      product.name = editedProduct.name
+      product.description = editedProduct.description
+      product.price = editedProduct.price
 
-    product.name = editedProduct.name
-    product.description = editedProduct.description
-    product.price = editedProduct.price
+      if (req.file) {
+        product.image = '/' + req.file.path
+      }
 
-    if (req.file) {
-      product.image = '/' + req.file.path
-    }
+      if (product.category.toString() !== editedProduct.category) {
+        Category.findById(product.category).then((currentCategory) => {
+          Category.findById(editedProduct.category).then((nextCategory) => {
+            let index = currentCategory.products.indexOf(product._id)
+            if (index >= 0) {
+              currentCategory.products.splice(index, 1)
+            }
+            currentCategory.save()
 
-    if (product.category.toString() !== editedProduct.category) {
-      Category.findById(product.category).then((currentCategory) => {
-        Category.findById(editedProduct.category).then((nextCategory) => {
-          let index = currentCategory.products.indexOf(product._id)
-          if (index >= 0) {
-            currentCategory.products.splice(index, 1)
-          }
-          currentCategory.save()
+            nextCategory.products.push(product._id)
+            nextCategory.save()
 
-          nextCategory.products.push(product._id)
-          nextCategory.save()
+            product.category = editedProduct.category
 
-          product.category = editedProduct.category
-
-          product.save().then(() => {
-            res.redirect('/?success=' + encodeURIComponent('Product was edited successfully!'))
+            product.save().then(() => {
+              res.redirect('/?success=' + encodeURIComponent('Product was edited successfully!'))
+            })
           })
         })
-      })
+      } else {
+        product.save().then(() => {
+          res.redirect('/?success=' + encodeURIComponent('Product was edited successfully!'))
+        })
+      }
     } else {
-      product.save().then(() => {
-        res.redirect('/?success=' + encodeURIComponent('Product was edited successfully!'))
-      })
+      res.redirect(`/?error=${encodeURIComponent('Request error: You must be "creator" or "admin" to EDIT the product!')}`)
     }
   })
 }
@@ -95,7 +102,11 @@ module.exports.deleteGet = (req, res) => {
       return
     }
 
-    res.render('product/delete', {product: product})
+    if (product.creator.equals(req.user._id) || req.user.roles.indexOf('Admin') >= 0) {
+      res.render('product/delete', {product: product})
+    } else {
+      res.redirect(`/?error=${encodeURIComponent('Request error: You must be "creator" or "admin" to DELETE the product!')}`)
+    }
   })
 }
 
@@ -108,20 +119,24 @@ module.exports.deletePost = (req, res) => {
       return
     }
 
-    Category.findById(product.category).then((category) => {
-      let index = category.products.indexOf(id)
+    if (product.creator.equals(req.user._id) || req.user.roles.indexOf('Admin') >= 0) {
+      Category.findById(product.category).then((category) => {
+        let index = category.products.indexOf(id)
 
-      if (index >= 0) {
-        category.products.splice(index, 1)
-      }
-      category.save()
+        if (index >= 0) {
+          category.products.splice(index, 1)
+        }
+        category.save()
 
-      Product.remove({_id: id}).then(() => {
-        fs.unlink(path.normalize(path.join(__dirname, '../.' + product.image)), () => {
-          res.redirect('/?success=' + encodeURIComponent('Product was deleted successfully!'))
+        Product.remove({_id: id}).then(() => {
+          fs.unlink(path.normalize(path.join(__dirname, '../.' + product.image)), () => {
+            res.redirect('/?success=' + encodeURIComponent('Product was deleted successfully!'))
+          })
         })
       })
-    })
+    } else {
+      res.redirect(`/?error=${encodeURIComponent('Request error: You must be "creator" or "admin" to DELETE the product!')}`)
+    }
   })
 }
 
