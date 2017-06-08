@@ -20,6 +20,14 @@ module.exports = (app, config) => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+  // make sure that the username will be NOT passed everytime if it is currently logged-in
+  app.use((req, res, next) => {
+    if (req.user) {
+      res.locals.user = req.user
+    }
+    next()
+  })
+
   app.use((req, res, next) => {
     if (req.url.startsWith('/content')) {
       req.url = req.url.replace('/content', '')
