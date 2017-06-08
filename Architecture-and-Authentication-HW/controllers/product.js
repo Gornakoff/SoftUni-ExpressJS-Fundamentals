@@ -32,6 +32,11 @@ module.exports.editGet = (req, res) => {
       return
     }
 
+    if (product.buyer) {
+      res.redirect(`/?error=${encodeURIComponent('Request Error: Product is locked and cannot be modified!')}`)
+      return
+    }
+
     if (product.creator.equals(req.user._id) || req.user.roles.indexOf('Admin') >= 0) {
       Category.find().then((categories) => {
         res.render('product/edit', {
@@ -54,6 +59,12 @@ module.exports.editPost = (req, res) => {
       res.redirect(`/?error=${encodeURIComponent('error=Product was not found!')}`)
       return
     }
+
+    if (product.buyer) {
+      res.redirect(`/?error=${encodeURIComponent('Request Error: Product is locked and cannot be modified!')}`)
+      return
+    }
+
     if (editedProduct.creator.equals(req.user._id) || req.user.roles.indexOf('Admin') >= 0) {
       product.name = editedProduct.name
       product.description = editedProduct.description
@@ -102,6 +113,11 @@ module.exports.deleteGet = (req, res) => {
       return
     }
 
+    if (product.buyer) {
+      res.redirect(`/?error=${encodeURIComponent('Request Error: Product is locked and cannot be deleted!')}`)
+      return
+    }
+
     if (product.creator.equals(req.user._id) || req.user.roles.indexOf('Admin') >= 0) {
       res.render('product/delete', {product: product})
     } else {
@@ -116,6 +132,11 @@ module.exports.deletePost = (req, res) => {
   Product.findById(id).then((product) => {
     if (!product) {
       res.redirect('/?error=' + encodeURIComponent('Product was not found!'))
+      return
+    }
+
+    if (product.buyer) {
+      res.redirect(`/?error=${encodeURIComponent('Request Error: Product is locked and cannot be deleted!')}`)
       return
     }
 
@@ -153,9 +174,9 @@ module.exports.buyGet = (req, res) => {
 }
 
 module.exports.buyPost = (req, res) => {
-  let productId = req.params.id
+  let id = req.params.id
 
-  Product.findById(productId).then((product) => {
+  Product.findById(id).then((product) => {
     if (product.buyer) {
       let error = `error=${encodeURIComponent('Product was already bought!')}`
       res.redirect(`/?${error}`)
@@ -164,7 +185,7 @@ module.exports.buyPost = (req, res) => {
 
     product.buyer = req.user._id
     product.save().then(() => {
-      req.user.boughtProducts.push(productId)
+      req.user.boughtProducts.push(id)
 
       req.user.save().then(() => {
         res.redirect('/')
