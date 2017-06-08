@@ -1,0 +1,22 @@
+{
+  "name": "blog-system",
+  "version": "1.0.0",
+  "description": "Simple Blog System using ExpressJS and MongoDB",
+  "main": "index.js",
+  "engines": {
+    "node": "8.0.0",
+    "npm": "5.0.0"
+  },
+  "keywords": [
+    "blog",
+    "system",
+    "express",
+    "mongodb"
+  ],
+  "author": "Gornakov",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.15.3",
+    "mongoose": "4.10.5"
+  }
+}
