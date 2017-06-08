@@ -29,4 +29,5 @@ module.exports = (app) => {
   app.post('/product/delete/:id', handlers.product.deletePost)
 
   app.get('/product/buy/:id', handlers.product.buyGet)
+  app.post('/product/buy/:id', handlers.product.buyPost)
 }
