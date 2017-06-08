@@ -18,6 +18,8 @@ module.exports = (app) => {
   app.get('/user/login', handlers.user.loginGet)
   app.post('/user/login', handlers.user.loginPost)
 
+  app.post('/user/logout', handlers.user.logout)
+
   app.get('/category/:category/products', handlers.category.productByCategory)
 
   app.get('/product/edit/:id', handlers.product.editGet)
