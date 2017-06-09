@@ -38,8 +38,14 @@ module.exports = {
 
     let pageSize = 1
     let page = parseInt(req.query.page) || 1
+    let search = req.query.search
 
-    Car.find({})
+    let query = Car.find({})
+    if (search) {
+      query = query.where('make').regex(new RegExp(search, 'i')) // case insensitive search
+    }
+
+    query
       .sort(`-${sortByPropName}`) // sort by property( createdOn ) in reverse order (using '-' symbol)
       .skip((page - 1) * pageSize)
       .limit(pageSize)
@@ -49,7 +55,8 @@ module.exports = {
           hasPrevPage: page > 1,
           hasNextPage: cars.length > 0,
           prevPage: page - 1,
-          nextPage: page + 1
+          nextPage: page + 1,
+          search: search
         })
       })
   }
