@@ -44,7 +44,7 @@ module.exports = {
       }
       if (!user.authenticate(reqUser.password)) {
         res.locals.globalError = 'Invalid user data'
-        res.render('user/login')
+        res.render('users/login')
         return
       }
 

@@ -5,6 +5,7 @@ module.exports = (app) => {
   app.get('/', controllers.home.index)
   app.get('/about', auth.isAuthenticated, controllers.home.about) // added authentication route
 
+  // user section
   app.get('/users/register', controllers.users.registerGet)
   app.post('/users/register', controllers.users.registerPost)
 
@@ -12,6 +13,12 @@ module.exports = (app) => {
   app.post('/users/login', controllers.users.loginPost)
 
   app.post('/users/logout', controllers.users.logout)
+
+  // car section
+  app.get('/cars/add', auth.isInRole('Admin'), controllers.cars.addGet)
+  app.post('/cars/add', auth.isInRole('Admin'), controllers.cars.addPost)
+
+  app.get('/cars/all', controllers.cars.all)
 
   app.all('*', (req, res) => {
     res.status(404)
