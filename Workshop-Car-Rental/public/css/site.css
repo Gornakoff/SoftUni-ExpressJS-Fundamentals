@@ -24,5 +24,13 @@ h1 {
   width: 100%;
 }
 .pageBtn {
-  font-size: 3em;
+  font-size: 1.3em;
+  width: 100%;
+}
+.pageNum {
+  display: inline-block;
+}
+.currentPage {
+  font-size: 1.4em;
+  color: blue;
 }

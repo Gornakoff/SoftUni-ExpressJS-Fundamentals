@@ -20,11 +20,27 @@
 {{/each}}
 
 <div class="pageBtn">
-  {{#if hasPrevPage}}
-    <a href="/cars/all?page={{prevPage}}&search={{search}}">&lt;&lt;</a> 
+  <div class="pageNum">
+    {{#if hasPrevPage}}
+    <a href="/cars/all?page=1&search={{search}}">&lt;&lt;&lt;</a>
     &nbsp;&nbsp;&nbsp; 
+    {{#if isNotFirst}}
+      <a href="/cars/all?page={{prevPage}}&search={{search}}">Page {{prevPage}}</a> 
+      &nbsp;&nbsp;&nbsp;
+    {{/if}}
   {{/if}} 
-  {{#if hasNextPage}}
-    <a href="/cars/all?page={{nextPage}}&search={{search}}">&gt;&gt;</a> 
-  {{/if}}
+  </div>
+  <div class="pageNum currentPage">
+    <a>{{currentPage}}</a>
+    &nbsp;&nbsp;&nbsp;     
+  </div>
+  <div class="pageNum">
+    {{#if hasNextPage}}
+      {{#if isNotLast}}
+        <a href="/cars/all?page={{nextPage}}&search={{search}}">Page {{nextPage}}</a>
+        &nbsp;&nbsp;&nbsp;
+      {{/if}}
+      <a href="/cars/all?page={{lastPage}}&search={{search}}">&gt;&gt;&gt;</a> 
+    {{/if}}
+  </div>
 </div>
