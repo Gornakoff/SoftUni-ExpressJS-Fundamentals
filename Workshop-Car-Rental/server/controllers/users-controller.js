@@ -71,7 +71,7 @@ module.exports = {
 
     Renting
       .find({ user: userId })
-      .sort('rentedOn')
+      .sort('-rentedOn')
       .populate('car')
       .then(rentings => {
         res.render('users/profile', {

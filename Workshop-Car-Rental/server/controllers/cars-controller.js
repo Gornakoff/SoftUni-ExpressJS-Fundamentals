@@ -118,5 +118,60 @@ module.exports = {
         res.locals.globalError = message
         res.render('cars/all')
       })
+  },
+  editGet: (req, res) => {
+    let id = req.params.id
+
+    Car
+      .findById(id)
+      .then(car => {
+        if (!car) {
+          res.sendStatus(404)
+          return
+        }
+
+        if (req.user.roles.indexOf('Admin') >= 0) {
+          res.render('cars/edit', {
+            car: car
+          })
+        }
+      })
+  },
+  editPost: (req, res) => {
+    let id = req.params.id
+    let carEdit = req.body
+
+    Car
+      .findById(id)
+      .then(car => {
+        if (!car) {
+          let message = 'Car was not found in the database!'
+          res.locals.globalError = message
+          res.redirect('/cars/all')
+          return
+        }
+        car.make = carEdit.make
+        car.model = carEdit.model
+        car.year = carEdit.year
+        car.pricePerDay = carEdit.pricePerDay
+        car.power = carEdit.power
+        car.image = carEdit.image
+
+        car.save()
+          .then(() => {
+            res.locals.globalSuccess = 'Car edited successfully!'
+            res.redirect('/cars/all')
+          })
+          .catch(err => {
+            let message = errorHandler.handleMongooseError(err)
+            res.locals.globalError = message
+            res.render(`/cars/edit/${car._id}`)
+          })
+      })
+      .catch(err => {
+        let message = errorHandler.handleMongooseError(err)
+        res.locals.globalError = message
+        res.render(`/cars/all`)
+      })
   }
 }

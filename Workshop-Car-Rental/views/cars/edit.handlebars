@@ -1,0 +1,21 @@
+<form action="/cars/edit/{{car._id}}" method="POST">
+  <label for="make">Make</label>
+  <input type="text" name="make" value="{{car.make}}" />
+  <br/>
+  <label for="model">Model</label>
+  <input type="text" name="model" value="{{car.model}}" />
+  <br/>
+  <label for="year">Year</label>
+  <input type="number" name="year" value="{{car.year}}" />
+  <br/>
+  <label for="pricePerDay">Price per day</label>
+  <input type="number" name="pricePerDay" value="{{car.pricePerDay}}" />
+  <br/>
+  <label for="power">Power</label>
+  <input type="number" name="power" value="{{car.power}}" />
+  <br/>
+  <label for="image">Image</label>
+  <input type="url" name="image" value="{{car.image}}" />
+  <br/>
+  <input type="submit" value="Save" />
+</form>

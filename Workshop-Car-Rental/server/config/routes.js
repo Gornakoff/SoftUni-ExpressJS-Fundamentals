@@ -24,6 +24,9 @@ module.exports = (app) => {
 
   app.post('/cars/rent/:id', auth.isAuthenticated, controllers.cars.rent)
 
+  app.get('/cars/edit/:id', auth.isInRole('Admin'), controllers.cars.editGet)
+  app.post('/cars/edit/:id', auth.isInRole('Admin'), controllers.cars.editPost)
+
   app.all('*', (req, res) => {
     res.status(404)
     res.send('404 Not Found!')
