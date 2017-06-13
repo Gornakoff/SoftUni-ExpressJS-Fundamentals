@@ -40,7 +40,7 @@ module.exports = {
             res.render('users/register', user)
           }
 
-          res.redirect('/')
+          res.redirect('/?success=' + encodeURIComponent('Registration successful!'))
         })
       })
       .catch(error => {
@@ -75,7 +75,7 @@ module.exports = {
             return
           }
 
-          res.redirect('/')
+          res.redirect('/?success=' + encodeURIComponent(`You've been logged in successfully!`))
         })
       })
     } else {
@@ -91,6 +91,6 @@ module.exports = {
   },
   logout: (req, res) => {
     req.logout()
-    res.redirect('/')
+    res.redirect('/success=' + encodeURIComponent('Logout successful!'))
   }
 }
