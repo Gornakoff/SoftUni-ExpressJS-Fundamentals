@@ -6,6 +6,18 @@
     <p>Views: {{thread.views}}</p>
   </div>
   <div>
+    Likes: {{likesCount}}
+    {{#if currentUser}}
+      {{#if liked}}
+        <form id="dislike-form" method="POST" action="/thread/{{thread._id}}/dislike">
+          <a href="javascript:document.getElementById('dislike-form').submit()">Dislike</a>
+        </form>  
+      {{else}}
+        <form id="like-form" method="POST" action="/thread/{{thread._id}}/like">
+          <a href="javascript:document.getElementById('like-form').submit()">Like</a>
+        </form>
+      {{/if}}       
+    {{/if}}
     {{#if isAdmin}}
       <a href="/thread/edit/{{thread._id}}">Edit thread</a>
       <a href="/thread/delete/{{thread._id}}">Delete thread</a>
@@ -16,7 +28,6 @@
   {{#if answers}}
     {{#each answers}}
         {{answer}}
-        
           {{#if ../isAdmin}}
             <a href="/answer/edit/{{_id}}">Edit answer</a>          
             <a href="/answer/delete/{{_id}}">Delete answer</a>

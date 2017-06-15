@@ -8,6 +8,7 @@ const Thread = mongoose.model('Thread')
 module.exports = {
   addGet: (req, res) => {
     let id = req.params.id
+    let userId = req.user._id
     let sortAnswersBy = '-createdOn'
 
     // count views
@@ -22,13 +23,22 @@ module.exports = {
             Thread
               .findById(id)
               .then(thread => {
+                let liked = false
+                let likesCount = thread.likes.length || 0
+
+                if (thread.likes.indexOf(userId) >= 0) {
+                  liked = true
+                }
+
                 Answer
                   .find({ thread: id })
                   .sort(sortAnswersBy)
                   .then(answers => {
                     res.render('answers/add', {
                       thread: thread,
-                      answers: answers
+                      answers: answers,
+                      liked: liked,
+                      likesCount: likesCount
                     })
                   })
               })

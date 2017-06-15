@@ -26,6 +26,9 @@ module.exports = (app) => {
   app.get('/thread/edit/:id', auth.isInRole('Admin'), controllers.threads.editGet)
   app.post('/thread/edit/:id', auth.isInRole('Admin'), controllers.threads.editPost)
 
+  app.post('/thread/:id/like', controllers.threads.like)
+  app.post('/thread/:id/dislike', controllers.threads.dislike)
+
   app.get('/list', controllers.threads.list)
 
   // Answer routings

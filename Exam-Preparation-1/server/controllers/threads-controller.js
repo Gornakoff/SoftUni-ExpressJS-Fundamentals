@@ -131,5 +131,41 @@ module.exports = {
             res.redirect('/list')
           })
       })
+  },
+  like: (req, res) => {
+    let threadId = req.params.id
+    let userId = req.user._id
+
+    Thread
+      .findById(threadId)
+      .then(thread => {
+        thread.likes.push(userId)
+
+        thread
+          .save()
+          .then(() => {
+            res.redirect(`/post/${thread._id}/${thread.title}`)
+          })
+      })
+  },
+  dislike: (req, res) => {
+    let threadId = req.params.id
+    let userId = req.user._id
+
+    Thread
+      .findById(threadId)
+      .then(thread => {
+        let index = thread.likes.indexOf(userId)
+
+        if (index >= 0) {
+          thread.likes.splice(index, 1)
+        }
+
+        thread
+          .save()
+          .then(() => {
+            res.redirect(`/post/${thread._id}/${thread.title}`)
+          })
+      })
   }
 }

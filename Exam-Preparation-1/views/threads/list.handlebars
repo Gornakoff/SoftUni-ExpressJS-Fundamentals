@@ -7,6 +7,9 @@
       <h2>{{this.title}}</h2>
       <p>{{this.description}}</p>
       <a href="/post/{{this._id}}/{{this.title}}">Show answers</a>
+      <div class="likes">
+          Likes: {{this.likes.length}}
+      </div>
     </div>
   {{/each}}
 {{else}}
