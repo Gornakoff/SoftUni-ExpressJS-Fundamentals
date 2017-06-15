@@ -223,6 +223,11 @@ textarea.input-field {
   padding: 5px;
 }
 
+.categories li {
+  display: block;
+  text-align: left;
+}
+
 footer {
   padding: 15px;
 }

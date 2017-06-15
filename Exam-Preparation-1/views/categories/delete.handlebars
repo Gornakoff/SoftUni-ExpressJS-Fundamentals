@@ -1,0 +1,10 @@
+<form class="form center-form" action="/category/delete/{{category._id}}" method="POST">
+  <h2>Delete Category</h2>
+
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" class="input-field" type="text" name="name" value="{{category.name}}"" disabled/>
+
+    <input class="form-btn btn btn-danger" type="submit" value="Delete" />
+  </div>
+</form>

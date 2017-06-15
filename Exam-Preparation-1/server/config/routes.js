@@ -47,6 +47,15 @@ module.exports = (app) => {
   app.get('/admins/add', auth.isInRole('Admin'), controllers.admins.addGet)
   app.post('/admins/add', auth.isInRole('Admin'), controllers.admins.addPost)
 
+  // Category routings
+  app.get('/category/add', controllers.categories.addGet)
+  app.post('/category/add', controllers.categories.addPost)
+
+  app.get('/category/delete/:id', controllers.categories.deleteGet)
+  app.post('/category/delete/:id', controllers.categories.deletePost)
+
+  app.get('/categories', controllers.categories.list)
+
   app.all('*', (req, res) => {
     res.status(404)
     res.send('404 Not Found!')

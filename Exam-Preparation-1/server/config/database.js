@@ -3,6 +3,7 @@ const User = require('../data/User')
 
 require('../data/Thread')
 require('../data/Answer')
+require('../data/Category')
 
 mongoose.Promise = global.Promise
 
