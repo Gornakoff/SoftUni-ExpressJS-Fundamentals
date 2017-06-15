@@ -1,0 +1,39 @@
+<div>
+   <h2>All Threads</h2>
+
+{{#if threads}}
+  {{#each threads}}
+    <div class="threads" >
+      <h2>{{this.title}}</h2>
+      <p>{{this.description}}</p>
+      <a href="/post/{{this._id}}/{{this.title}}">Show answers</a>
+    </div>
+  {{/each}}
+{{else}}
+  <h4>No threads found!</h4>
+{{/if}}
+</div>
+
+<div class="paging">
+  <div class="pagination">
+    {{#if hasPrevPage}}
+      <a href="/list?page=1">&lt;&lt;&lt;</a>
+    {{#if isNotFirst}}
+      &nbsp;&nbsp;&nbsp;
+      <a href="/list?page={{prevPage}}">{{prevPage}}</a> 
+    {{/if}}
+  {{/if}} 
+  </div>
+  <div class="pageNum">
+    <a class="currentPage">{{currentPage}}</a>  
+  </div>
+  <div class="pagination">
+    {{#if hasNextPage}}
+      {{#if isNotLast}}  
+        <a href="/list?page={{nextPage}}">{{nextPage}}</a>
+        &nbsp;&nbsp;&nbsp;
+      {{/if}}
+      <a href="/list?page={{lastPage}}">&gt;&gt;&gt;</a> 
+    {{/if}}
+  </div>
+</div>

@@ -76,6 +76,8 @@ footer {
 textarea.input-field {
   padding: 10px;
   font-family: inherit;
+  height: 150px;
+  width: 300px;
 }
 
 .input-field:focus {
@@ -180,6 +182,45 @@ textarea.input-field {
 
 .align-right {
   float: right
+}
+
+.threads {
+  padding-left: 10px;
+  background-color: silver;
+  border-radius: 15px;
+}
+.threads p {
+  padding-left: 20px;
+  padding-bottom: 10px;
+}
+
+.paging {
+  display: flex;
+  margin-top: 10px;
+}
+
+.pagination {
+  display: flex;
+  padding-left: 0;
+  list-style: none;
+  border-radius: 0.25rem;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-top: 3px;
+}
+
+.pageNum {
+  display: inline;
+  border: thin;
+  border-style: groove;
+  border-color: blue;
+  border-radius: 6px;
+}
+.currentPage {
+  font-size: 1.3em;
+  font-weight: bold;
+  color: blue;
+  padding: 5px;
 }
 
 footer {

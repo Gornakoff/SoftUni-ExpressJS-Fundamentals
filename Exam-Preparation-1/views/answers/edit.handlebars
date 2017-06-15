@@ -1,0 +1,10 @@
+<form class="center-form" action="/answer/edit/{{answer._id}}" method="POST">
+  <div class="form-group" >
+    <label for="answer">Edit answer</label>
+    <textarea class="input-field" type="text" name="answer">{{answer.answer}}</textarea>
+  </div>
+
+  <div class="form-group">
+    <input class="form-btn btn btn-warning" type="submit" value="Save" />
+  </div>
+</form>

@@ -1,0 +1,15 @@
+<form class="center-form" action="/thread/delete/{{thread._id}}" method="POST">
+  <div class="form-group" >
+    <label for="title">Title</label>
+  <input class="input-field" type="textarea" name="title" value="{{thread.title}}" disabled />
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <input class="input-field" type="textarea" name="description" value="{{thread.description}}" disabled />
+  </div>
+
+  <div class="form-group">
+    <input class="form-btn btn btn-danger" type="submit" value="DELETE" />
+  </div>
+</form>

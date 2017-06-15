@@ -1,0 +1,9 @@
+{{#if admins}}
+  {{#each admins}}
+    <div>
+      <h3>User: << {{username}} >></h3>
+    </div>
+  {{/each}}
+{{else}}
+  <h3>No admins found!</h3>
+{{/if}}

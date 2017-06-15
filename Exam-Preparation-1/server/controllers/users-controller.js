@@ -1,6 +1,9 @@
+const mongoose = require('mongoose')
 const encryption = require('../utilities/encryption')
 const errorHandler = require('../utilities/error-handler')
 const User = require('../data/User')
+const Answer = mongoose.model('Answer')
+const Thread = mongoose.model('Thread')
 
 module.exports = {
   registerGet: (req, res) => {
@@ -91,6 +94,37 @@ module.exports = {
   },
   logout: (req, res) => {
     req.logout()
-    res.redirect('/success=' + encodeURIComponent('Logout successful!'))
+    res.redirect('/?success=' + encodeURIComponent('Logout successful!'))
+  },
+  profile: (req, res) => {
+    let username = req.params.username
+
+    User
+      .findOne({ username: username })
+      .then(user => {
+        if (!user) {
+          res.sendStatus(404)
+          return
+        }
+
+        Thread
+          .find({ author: user._id })
+          .then(threads => {
+            Answer
+              .find({ author: user._id })
+              .then(answers => {
+                res.render('users/profile', {
+                  user: user,
+                  threads: threads,
+                  answers: answers
+                })
+              })
+          })
+      })
+      .catch(error => {
+        let message = errorHandler.handleMongooseError(error)
+        res.locals.globalError = message
+        res.render('users/profile')
+      })
   }
 }

@@ -1,0 +1,42 @@
+<div class="threads">
+  <h2>{{thread.title}}</h2>
+  <h4>{{thread.description}}</h4>
+  
+  <div class="views">
+    <p>Views: {{thread.views}}</p>
+  </div>
+  <div>
+    {{#if isAdmin}}
+      <a href="/thread/edit/{{thread._id}}">Edit thread</a>
+      <a href="/thread/delete/{{thread._id}}">Delete thread</a>
+    {{/if}}
+  </div>
+</div>
+<div>
+  {{#if answers}}
+    {{#each answers}}
+        {{answer}}
+        
+          {{#if ../isAdmin}}
+            <a href="/answer/edit/{{_id}}">Edit answer</a>          
+            <a href="/thread/delete/{{_id}}">Delete answer</a>
+          {{/if}}
+        <br/>
+    {{/each}}
+  {{else}}
+    <h3>This thread has no answers!</h3>
+  {{/if}}
+</div>
+
+{{#if currentUser}}
+  <form class="form center-form" action="/post/{{thread._id}}/{{thread.title}}" method="POST">
+    <div class="form-group">
+      <label for="answer">Answer</label>
+      <textarea class="input-field" type="text" name="answer"></textarea>
+    </div>
+
+    <div class="form-group">
+      <input class="btn form-btn" type="submit" value="Add answer" />
+    </div>
+  </form>
+{{/if}}

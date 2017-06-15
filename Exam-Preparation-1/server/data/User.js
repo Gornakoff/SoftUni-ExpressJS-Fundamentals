@@ -8,7 +8,7 @@ let userSchema = new mongoose.Schema({
   salt: { type: String },
   firstName: { type: String, required: REQUIRED_VALIDATION_MESSAGE.replace('{0}', 'First name') },
   lastName: { type: String, required: REQUIRED_VALIDATION_MESSAGE.replace('{0}', 'Last name') },
-  roles: [String]
+  roles: [ {type: String} ]
 })
 
 userSchema.method({

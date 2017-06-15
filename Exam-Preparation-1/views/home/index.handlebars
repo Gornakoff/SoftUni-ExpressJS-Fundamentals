@@ -5,6 +5,9 @@
   <input type="submit" value="Search"/>
 </form>
 
-<div>
-
-</div>
+{{#each threads}}
+  <div class="threads" >
+    <h2>{{this.title}}</h2>
+    <p>{{this.description}}</p>
+  </div>
+{{/each}}
