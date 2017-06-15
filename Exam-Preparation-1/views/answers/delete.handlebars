@@ -1,0 +1,10 @@
+<form class="center-form" action="/answer/delete/{{answer._id}}" method="POST">
+  <div class="form-group" >
+    <label for="answer">Delete answer</label>
+    <textarea class="input-field" type="text" name="answer" disabled>{{answer.answer}}</textarea>
+  </div>
+
+  <div class="form-group">
+    <input class="form-btn btn btn-danger" type="submit" value="Delete" />
+  </div>
+</form>

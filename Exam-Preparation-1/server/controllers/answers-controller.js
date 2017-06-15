@@ -96,5 +96,48 @@ module.exports = {
             res.redirect('/')
           })
       })
+  },
+  deleteGet: (req, res) => {
+    let answerId = req.params.id
+
+    Answer
+      .findById(answerId)
+      .then(answer => {
+        if (!answer) {
+          res.sendStatus(404)
+          return
+        }
+        res.render('answers/delete', {
+          answer: answer
+        })
+      })
+  },
+  deletePost: (req, res) => {
+    let answerId = req.params.id
+
+    Answer
+      .findById(answerId)
+      .then(answer => {
+        let threadId = answer.thread
+
+        Thread
+          .findById(threadId)
+          .then(thread => {
+            let index = thread.answers.indexOf(answerId)
+            if (index >= 0) {
+              thread.answers.splice(index, 1)
+            }
+
+            thread
+              .save()
+              .then(() => {
+                Answer
+                  .remove({_id: answerId})
+                  .then(() => {
+                    res.redirect('/list')
+                  })
+              })
+          })
+      })
   }
 }

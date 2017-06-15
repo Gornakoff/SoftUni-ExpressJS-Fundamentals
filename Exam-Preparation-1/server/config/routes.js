@@ -32,8 +32,8 @@ module.exports = (app) => {
   app.get('/post/:id/:title', controllers.answers.addGet)
   app.post('/post/:id/:title', auth.isAuthenticated, controllers.answers.addPost)
 
-  app.get('/answer/delete/:id', auth.isInRole('Admin'), controllers.threads.deleteGet)
-  app.post('/answer/delete/:id', auth.isInRole('Admin'), controllers.threads.deletePost)
+  app.get('/answer/delete/:id', auth.isInRole('Admin'), controllers.answers.deleteGet)
+  app.post('/answer/delete/:id', auth.isInRole('Admin'), controllers.answers.deletePost)
 
   app.get('/answer/edit/:id', auth.isInRole('Admin'), controllers.answers.editGet)
   app.post('/answer/edit/:id', auth.isInRole('Admin'), controllers.answers.editPost)
