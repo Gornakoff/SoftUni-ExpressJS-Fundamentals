@@ -10,6 +10,19 @@
   </div>
 
   <div class="form-group">
+    <label for="Category">Category</label>
+    <select class="input-field" name="category">
+      {{#each categories}}
+        {{#ifequal this._id  thread.category}}
+          <option value="{{this._id}}">{{this.name}}</option>
+        {{else}}
+          <option value="{{this._id}}" selected>{{this.name}}</option>
+        {{/ifequal}}
+      {{/each}}
+    </select>
+  </div>
+
+  <div class="form-group">
     <input class="form-btn btn btn-warning" type="submit" value="Save" />
   </div>
 </form>

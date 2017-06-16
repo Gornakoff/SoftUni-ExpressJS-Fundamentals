@@ -9,7 +9,9 @@ let threadSchema = new mongoose.Schema({
   answers: [ { type: mongoose.Schema.Types.ObjectId, ref: 'Answer' } ],
   author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   views: { type: Number, default: 0 },
-  likes: [{ type: mongoose.Schema.ObjectId, ref: 'User' }]
+  likes: [{ type: mongoose.Schema.ObjectId, ref: 'User' }],
+  // category: { type: mongoose.Schema.Types.ObjectId, ref: 'Category' }
+  category: [{ type: String }]
 })
 
 let Thread = mongoose.model('Thread', threadSchema)

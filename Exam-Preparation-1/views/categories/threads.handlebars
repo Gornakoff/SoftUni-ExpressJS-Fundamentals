@@ -1,0 +1,8 @@
+<ul class="categories">
+{{#each threads}}
+  {{#ifequal this.category  categoryId}}
+  {{else}}
+    <li>{{this.title}}</li>
+  {{/ifequal}}
+{{/each}}
+</ul>

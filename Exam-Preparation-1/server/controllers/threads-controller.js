@@ -1,11 +1,18 @@
 const mongoose = require('mongoose')
 const Thread = mongoose.model('Thread')
 const Answer = mongoose.model('Answer')
+const Category = mongoose.model('Category')
 const errorHandler = require('../utilities/error-handler')
 
 module.exports = {
   addGet: (req, res) => {
-    res.render('threads/add')
+    Category
+      .find({})
+      .then(categories => {
+        res.render('threads/add', {
+          categories: categories
+        })
+      })
   },
   addPost: (req, res) => {
     let threadReq = req.body
@@ -16,7 +23,8 @@ module.exports = {
       description: threadReq.description,
       lastAnswerDate: new Date().toISOString(),
       createdOn: new Date().toISOString(),
-      author: userId
+      author: userId,
+      category: threadReq.category
     }
 
     Thread
@@ -103,16 +111,21 @@ module.exports = {
   editGet: (req, res) => {
     let threadId = req.params.id
 
-    Thread
-      .findById(threadId)
-      .then(thread => {
-        if (!thread) {
-          res.sendStatus(404)
-          return
-        }
-        res.render('threads/edit', {
-          thread: thread
-        })
+    Category
+      .find({})
+      .then(categories => {
+        Thread
+          .findById(threadId)
+          .then(thread => {
+            if (!thread) {
+              res.sendStatus(404)
+              return
+            }
+            res.render('threads/edit', {
+              thread: thread,
+              categories: categories
+            })
+          })
       })
   },
   editPost: (req, res) => {
@@ -124,6 +137,11 @@ module.exports = {
       .then(thread => {
         thread.title = editReq.title
         thread.description = editReq.description
+
+        if (thread.category !== editReq.category) {
+          thread.category.splice(0, 1)
+          thread.category.push(editReq.category)
+        }
 
         thread
           .save()

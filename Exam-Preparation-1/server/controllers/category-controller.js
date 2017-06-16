@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Category = mongoose.model('Category')
+const Thread = mongoose.model('Thread')
 
 module.exports = {
   addGet: (req, res) => {
@@ -39,11 +40,22 @@ module.exports = {
   deletePost: (req, res) => {
     let categoryId = req.params.id
 
-    Category
-      .remove({ _id: categoryId })
-      .then(() => {
-        res.redirect('/categories')
+    Thread
+      .find({ category: categoryId })
+      .then(threads => {
+        for (let thread of threads) {
+          let index = thread.category.indexOf(categoryId)
+          if (index >= 0) {
+            thread.category.splice(index, 1)
+            thread.save()
+          }
+        }
       })
+  // Category
+  //   .remove({ _id: categoryId })
+  //   .then(() => {
+  //     res.redirect('/categories')
+  //   })
   },
   list: (req, res) => {
     Category
@@ -52,6 +64,23 @@ module.exports = {
         res.render('categories/list', {
           categories: categories
         })
+      })
+  },
+  posts: (req, res) => {
+    let categoryName = req.params.name
+
+    Category
+      .findOne({name: categoryName})
+      .then(category => {
+        let categoryId = category._id
+        Thread
+          .find({ category: categoryId })
+          .then(threads => {
+            res.render('categories/threads', {
+              threads: threads,
+              categoryId: categoryId
+            })
+          })
       })
   }
 }

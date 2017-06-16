@@ -55,6 +55,7 @@ module.exports = (app) => {
   app.post('/category/delete/:id', controllers.categories.deletePost)
 
   app.get('/categories', controllers.categories.list)
+  app.get('/list/:name', controllers.categories.posts)
 
   app.all('*', (req, res) => {
     res.status(404)
