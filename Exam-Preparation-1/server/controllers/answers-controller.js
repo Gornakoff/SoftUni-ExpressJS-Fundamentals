@@ -8,7 +8,10 @@ const Thread = mongoose.model('Thread')
 module.exports = {
   addGet: (req, res) => {
     let id = req.params.id
-    let userId = req.user._id
+    let userId
+    if (req.user) {
+      userId = req.user._id
+    }
     let sortAnswersBy = '-createdOn'
 
     // count views

@@ -126,5 +126,14 @@ module.exports = {
         res.locals.globalError = message
         res.render('users/profile')
       })
+  },
+  all: (req, res) => {
+    User
+      .find({})
+      .then(users => {
+        res.render('users/all', {
+          users: users
+        })
+      })
   }
 }

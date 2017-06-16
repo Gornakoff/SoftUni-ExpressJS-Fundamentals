@@ -37,5 +37,35 @@ module.exports = {
             res.redirect('/admins/all')
           })
       })
+  },
+  blockUser: (req, res) => {
+    let userId = req.params.id
+
+    User
+      .findById(userId)
+      .then(user => {
+        user.blocked = true
+
+        user
+          .save()
+          .then(() => {
+            res.redirect('/users/all')
+          })
+      })
+  },
+  unblockUser: (req, res) => {
+    let userId = req.params.id
+
+    User
+      .findById(userId)
+      .then(user => {
+        user.blocked = false
+
+        user
+          .save()
+          .then(() => {
+            res.redirect(`/users/all`)
+          })
+      })
   }
 }

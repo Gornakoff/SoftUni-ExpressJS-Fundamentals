@@ -14,5 +14,19 @@ module.exports = {
         res.redirect('/users/login')
       }
     }
+  },
+  isBlocked: (status) => {
+    return (req, res, next) => {
+      if (req.isAuthenticated()) {
+        let userStatus = req.user.blocked
+        if (status === userStatus) {
+          next()
+        } else {
+          res.redirect('/')
+        }
+      } else {
+        res.redirect('/users/login')
+      }
+    }
   }
 }

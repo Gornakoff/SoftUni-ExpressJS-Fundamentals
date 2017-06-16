@@ -1,0 +1,21 @@
+
+  <div>
+    <ul>
+      {{#each users}}
+
+      <li>
+        {{this.username}}
+        {{#if this.blocked}}
+          <form id="unblock-form" method="POST">
+            <button type="submit" formaction="/user/{{this._id}}/unblock">Unblock</button>
+          </form>  
+        {{else}}
+          <form id="block-form" method="POST">
+            <button type="submit" formaction="/user/{{this._id}}/block">Block</button>
+          </form>
+        {{/if}}    
+      </li>
+
+    {{/each}}
+  </ul>
+</div>

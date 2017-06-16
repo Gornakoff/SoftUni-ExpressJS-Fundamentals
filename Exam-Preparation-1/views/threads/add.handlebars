@@ -1,28 +1,32 @@
-<form class="form center-form" action="/add" method="POST">
-  <h2>Add thread</h2>
+{{#if currentUser.blocked}}
+  <h2>You are blocked and can't add new threads!</h2>
+{{else}}
+  <form class="form center-form" action="/add" method="POST">
+    <h2>Add thread</h2>
 
-  <div class="form-group">
-    <label for="title">Title</label>
-    <input class="input-field" type="text" name="title" value="{{title}}" />
-  </div>
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input class="input-field" type="text" name="title" value="{{title}}" />
+    </div>
 
-  <div class="form-group">
-    <label for="description">Description</label>
-    <input class="input-field" type="text" name="description"  value="{{description}}" />
-  </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input class="input-field" type="text" name="description"  value="{{description}}" />
+    </div>
 
-  <div class="form-group">
-    <label for="Category">Category</label>
-    <select class="input-field" name="category">
-      {{#each categories}}
-        <option value="{{this._id}}">
-          {{this.name}}
-        </option>
-      {{/each}}
-    </select>
-  </div>
+    <div class="form-group">
+      <label for="Category">Category</label>
+      <select class="input-field" name="category">
+        {{#each categories}}
+          <option value="{{this._id}}">
+            {{this.name}}
+          </option>
+        {{/each}}
+      </select>
+    </div>
 
-  <div class="form-group">
-    <input class="btn form-btn" type="submit" value="Add" />
-  </div>
-</form>
+    <div class="form-group">
+      <input class="btn form-btn" type="submit" value="Add" />
+    </div>
+  </form>
+{{/if}}

@@ -16,6 +16,8 @@ module.exports = (app) => {
 
   app.get('/profile/:username', controllers.users.profile)
 
+  app.get('/users/all', auth.isAuthenticated, auth.isBlocked(false), controllers.users.all)
+
   // Thread routings
   app.get('/add', auth.isAuthenticated, controllers.threads.addGet)
   app.post('/add', auth.isAuthenticated, controllers.threads.addPost)
@@ -26,8 +28,8 @@ module.exports = (app) => {
   app.get('/thread/edit/:id', auth.isInRole('Admin'), controllers.threads.editGet)
   app.post('/thread/edit/:id', auth.isInRole('Admin'), controllers.threads.editPost)
 
-  app.post('/thread/:id/like', controllers.threads.like)
-  app.post('/thread/:id/dislike', controllers.threads.dislike)
+  app.post('/thread/:id/like', auth.isAuthenticated, controllers.threads.like)
+  app.post('/thread/:id/dislike', auth.isAuthenticated, controllers.threads.dislike)
 
   app.get('/list', controllers.threads.list)
 
@@ -47,12 +49,15 @@ module.exports = (app) => {
   app.get('/admins/add', auth.isInRole('Admin'), controllers.admins.addGet)
   app.post('/admins/add', auth.isInRole('Admin'), controllers.admins.addPost)
 
+  app.post('/user/:id/block', auth.isInRole('Admin'), controllers.admins.blockUser)
+  app.post('/user/:id/unblock', auth.isInRole('Admin'), controllers.admins.unblockUser)
+
   // Category routings
   app.get('/category/add', controllers.categories.addGet)
-  app.post('/category/add', controllers.categories.addPost)
+  app.post('/category/add', auth.isInRole('Admin'), controllers.categories.addPost)
 
   app.get('/category/delete/:id', controllers.categories.deleteGet)
-  app.post('/category/delete/:id', controllers.categories.deletePost)
+  app.post('/category/delete/:id', auth.isInRole('Admin'), controllers.categories.deletePost)
 
   app.get('/categories', controllers.categories.list)
   app.get('/list/:name', controllers.categories.posts)

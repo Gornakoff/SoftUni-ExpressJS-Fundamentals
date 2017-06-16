@@ -157,6 +157,7 @@ module.exports = {
     Thread
       .findById(threadId)
       .then(thread => {
+        thread.views = thread.views - 1
         thread.likes.push(userId)
 
         thread
@@ -178,6 +179,7 @@ module.exports = {
         if (index >= 0) {
           thread.likes.splice(index, 1)
         }
+        thread.views = thread.views - 1
 
         thread
           .save()

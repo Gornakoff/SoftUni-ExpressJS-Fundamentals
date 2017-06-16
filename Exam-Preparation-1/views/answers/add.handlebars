@@ -40,14 +40,18 @@
 </div>
 
 {{#if currentUser}}
-  <form class="form center-form" action="/post/{{thread._id}}/{{thread.title}}" method="POST">
-    <div class="form-group">
-      <label for="answer">Answer</label>
-      <textarea class="input-field" type="text" name="answer"></textarea>
-    </div>
+  {{#if currentUser.blocked}}
+    <h3>You are blocked and can't add answers! </h3>
+  {{else}}
+    <form class="form center-form" action="/post/{{thread._id}}/{{thread.title}}" method="POST">
+      <div class="form-group">
+        <label for="answer">Answer</label>
+        <textarea class="input-field" type="text" name="answer"></textarea>
+      </div>
 
-    <div class="form-group">
-      <input class="btn form-btn" type="submit" value="Add answer" />
-    </div>
-  </form>
+      <div class="form-group">
+        <input class="btn form-btn" type="submit" value="Add answer" />
+      </div>
+    </form>
+  {{/if}}
 {{/if}}
