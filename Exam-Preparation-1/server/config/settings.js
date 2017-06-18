@@ -1,6 +1,6 @@
 const path = require('path')
 const dbName = 'forum-system'
-const port = process.env.PORT || 1337
+const port = process.env.PORT || 8888
 
 let rootPath = path.normalize(path.join(__dirname, '/../../'))
 
