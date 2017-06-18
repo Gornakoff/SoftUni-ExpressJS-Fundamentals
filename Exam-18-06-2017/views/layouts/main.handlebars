@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Messenger</title>
+  <link href="/css/site.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+  <div class="nav">
+    <ul>
+      <li><a href="/">Home</a></li>
+      {{#if currentUser}}
+        <li class="delimiter"></li>
+        <li class="align-right">
+          <form id="logout-form" action="/users/logout" method="POST"></form>
+          <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
+        </li>
+        <li class="align-right">{{currentUser.username}}</li>
+        
+      {{else}}
+        <li class="align-right"><a href="/users/register">Register</a></li>
+        <li class="align-right"><a href="/users/login">Login</a></li>
+      {{/if}}
+    </ul>
+    {{#if globalError}}
+      <h3 class="error-msg">{{globalError}}</h3>
+    {{else if success}}
+      <h3 class="success-msg">{{success}}</h3>
+    {{/if}} 
+    {{{body}}}
+  </div>
+</body>
+
+</html>
